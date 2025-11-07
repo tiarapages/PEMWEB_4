@@ -3,7 +3,7 @@ import axios from 'axios';
 // ‼️ PENTING: GANTI URL INI
 // Sesuaikan dengan URL dan PORT backend Express kamu.
 // Jika API-mu ada prefix '/api', tambahkan juga.
-const API_BASE_URL = 'http://localhost:4000'; 
+const API_BASE_URL = 'http://localhost:8080'; 
 
 // Membuat instance axios
 const api = axios.create({
@@ -15,7 +15,7 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('authToken'); // 'authToken' = nama kuncinya
-    if (token && !config.url?.includes('/login') && !config.url?.includes('/register')) {
+    if (token && !config.url?.includes('/auth/login') && !config.url?.includes('/auth/register')) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
